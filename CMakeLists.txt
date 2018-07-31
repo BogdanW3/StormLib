@@ -7,6 +7,7 @@ include(CMakeDependentOption)
 
 option(BUILD_SHARED_LIBS "Compile shared libraries" OFF)
 option(STORM_SKIP_INSTALL "Skip installing files" OFF)
+option(USE_WITH_CASC "Compile for simultaneous usage eith CascLib" ON)
 option(STORM_BUILD_TESTS
     "Compile StormLib test application" OFF
 #   "BUILD_TESTING" OFF # Stay coherent with CTest variables
@@ -327,6 +328,11 @@ if(BUILD_SHARED_LIBS)
     endif()
 else()
     message(STATUS "Linking against dependent libraries statically")
+endif()
+
+if(USE_WITH_CASC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSTORM_CASC")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DSTORM_CASC")
 endif()
 
 if (NOT STORM_SKIP_INSTALL)

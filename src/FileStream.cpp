@@ -36,6 +36,7 @@
 #ifndef PLATFORM_WINDOWS
 static DWORD nLastError = ERROR_SUCCESS;
 
+#ifndef STORM_CASC
 DWORD GetLastError()
 {
     return nLastError;
@@ -45,6 +46,7 @@ void SetLastError(DWORD dwErrCode)
 {
     nLastError = dwErrCode;
 }
+#endif
 #endif
 
 static DWORD StringToInt(const char * szString)
